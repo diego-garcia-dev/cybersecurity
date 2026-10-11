@@ -1,64 +1,39 @@
-# Level 12 -> Level 13
-The goal of this level is to find the password stored in the `data.txt` file, which is a hexdump of a file that has been repeatedly compressed.
+# Level 13 -> Level 14
 
-To begin decompressing the file, we first must revert the hexdump that it was made into. We will do this by using the command:
+The goal of this level is to find the password stored in `/etc/bandit_pass/bandit14`, which can only be read by the user `bandit14`. Rather than the usual scrambled password, we will get a private SSH key that can be used to log into the next level.
 
-`xxd -r data.txt`
+The commands I needed to use for this level were `ssh`, `scp`, and `chmod` which will be explained more in-depth later.
 
-We will notice that the command will simply output to the terminal. In this instance, we actually want it in a file since we know that the hexdump was compressed so we can begin decompressing. We will do this by piping/redirecting the output to a separate file.
+To begin with, when we use `ls` in the `home` directory, we see:
 
-`xxd -r data.txt > data1.txt`
+`HINT   sshkey.private`
 
-Next we must repeatedly use the `file` command to observe the file's properties:
+The `sshkey.private` is already given to us and ready to use BUT we can't use `ssh` to `bandit14` while already connected to `bandit13`. For this reason, we are given the `scp` command which is used to copy files from other servers and place them in your own.
 
-`file data1.txt`
+Now that we know the directory to access the `sshkey.private` file, we can apply the command:
 
-With the output being:
+`scp -P 2220 bandit13@bandit.labs.overthewire.org:/home/bandit13/sshkey.private .`
 
-`data1.txt: gzip compressed data, was "data2.bin", last modified: Wed Jun 24 14:58:58 2026, max compression, from Unix, original size modulo 2^32 578`
+The `:` allows us to point to the directory needed with the `.` telling the server to put the file in the directory we are in, though we can replace it with something like `/home/user/Downloads` if needed.
 
-Letting us know that we now must use the `gzip` command to begin decompressing. This is done with the `-d` parameter to signify decompression and the `-S` parameter to specify the filename extension:
+Now that we have our private key, we must secure it so that no one else can read it besides admins or else we will get the error message:
 
-`gzip -d -S .txt data1.txt`
+`@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@         WARNING: UNPROTECTED PRIVATE KEY FILE!          @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Permissions 0640 for 'sshkey.private' are too open.
+It is required that your private key files are NOT accessible by others.
+This private key will be ignored.
+Load key "sshkey.private": bad permissions`
 
-This will turn the `data1.txt` file into a `data1` file which, when `file` is used on it, will output:
+We can secure it by using `chmod`:
 
-`data1: bzip2 compressed data, block size = 900k`
+`chmod 600 sshkey.private`
 
-Once again, signifying that we must now use the `bzip2` or `bzcat` command:
+The `6` in the 3 digits gives read and write properties to admins while the two `0`s give no permissions to groups and everyone else.
 
-`bzcat data1 > data2`
+Now we can use the command:
 
-We `file` data2:
+`ssh -i sshkey.private -p 2220 bandit14@bandit.labs.overthewire.org`
 
-`data2: gzip compressed data, was "data4.bin", last modified: Wed Jun 24 14:58:58 2026, max compression, from Unix, original size modulo 2^32 20480`
-
-We use the `zcat` command since the `data2` file doesn't have a filename extension:
-
-`zcat data2 > data3`
-
-We `file` data3:
-
-`data3: POSIX tar archive (GNU)`
-
-And use the `tar` command to extract the `data3` file:
-
-`tar --extract --file data3`
-
-Netting us `data5.bin`, which is again a `POSIX tar archive (GNU)`, so we use the same command:
-
-`tar --extract --file data5.bin`
-
-Resulting in `data6.bin` which is `bzip2 compressed data` needing the command:
-
-`bzcat data6.bin > data7`
-
-Resulting in `data7` being another `POSIX tar archive (GNU)` needing the command:
-
-`tar --extract --file data7`
-
-Resulting in `data8` which is a `gzip compressed data` needing the command:
-
-`gzip -d -S .bin data8.bin`
-
-Finally, we can `cat` the `data8` file, resulting in the output of our password.
+Which uses the `-i` parameter to indicate to use the files as the sshkey, allowing us to log into level 15.

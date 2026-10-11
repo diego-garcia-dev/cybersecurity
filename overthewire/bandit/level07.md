@@ -1,19 +1,18 @@
-# Level 6 -> Level 7 
+# Level 7 -> Level 8
 
-The goal of this level is to find the password stored somewhere on the server which has the following properties:
+The goal of this level is to find the password stored in the file `data.txt` next to the word millionth.
 
-- Owned by the user bandit7
-- Owned by the group bandit6
-- 33 bytes in size
+I found this level easier than the rest simply using the command:
 
-The way I found this password was by using find:
+`cat data.txt | grep millionth` 
 
-`find -user bandit7 -group bandit6 -size 33c`
 
-The only issue was that a lot of other directories and files fell under those circumstances. For this reason, I used `grep` to isolate/highliht the text needed:
+`cat` displaying the file's text and `grep` isolating the password and word `millionth`.
 
-`find -user bandit7 -group bandit6 -size 33c | grep password`
+Provides me with:
 
-I then used cat to recieve the password.
+`millionth       dfwvzFQi4mU0wfNbFOe9RoWskMLg7eEc`
 
-Logged in as `bandit7`, found the password in the file `/var/lib/dpkg/info/bandit7.password`. Moving on to level 8.
+Providing us our password.
+
+Logged in as bandit8, the password was in file `data.txt`. Moving to level 9.

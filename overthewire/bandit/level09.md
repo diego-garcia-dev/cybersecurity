@@ -1,11 +1,9 @@
-# Level 8 -> Level 9
+# Level 9 -> Level 10
 
-The goal is to find the password is stored in the file `data.txt`, being the only line of text that occurs only once.
+The goal of this level is to find the password stored in the `data.txt`, being one of the few human-readable strings, preceded by several ‘=’ characters.
 
-Knowing that the line occurs only once, we would refer to the `uniq` command which isolates these types of lines once sorted. The command used looks like this:
+Using cat won't work anymore due to the varying data types. For this reason, we use `strings` to display only the human-readable text while using `grep`. The command ran is:
 
-`sort data.txt | uniq -u`
+`strings data.txt | grep ===`
 
-It sorts the data based on similar text and then provides us with only the `uniq` chracter due to the arg `-u`.
-
-Logged in as bandit 9, found the password in `data.txt`. Moving on to level 10.
+Logged in as bandit10, found the password in `data.txt`. Moving on to level 11.

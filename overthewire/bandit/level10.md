@@ -1,9 +1,11 @@
-# Level 9 -> Level 10
+# Level 10 -> Level 11
 
-The goal of this level is to find the password stored in the `data.txt`, being one of the few human-readable strings, preceded by several ‘=’ characters.
+The goal of this level is to find the password stored in the `data.txt` file filled with text encoded with base64.
 
-Using cat won't work anymore due to the varying data types. For this reason, we use `strings` to display only the human-readable text while using `grep`. The command ran is:
+To decode the file, you must use the `-d` parameter when using the base64 command.
 
-`strings data.txt | grep ===`
+The command I ran was:
 
-Logged in as bandit10, found the password in `data.txt`. Moving on to level 11.
+`base64 -d data.txt`
+
+Logged in as bandit11, found the password in the `data.txt` file. Moving to level 12.

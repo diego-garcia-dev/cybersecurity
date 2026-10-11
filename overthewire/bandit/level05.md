@@ -1,13 +1,18 @@
-# Level 4 -> Level 5
+# Level 5 -> Level 6 
 
-The goal is to find the password stored in the only human-readable file in the `inhere` directory.
+The goal is to find the password stored in a file under the `inhere` directory which has the properties:
+- human-readable
+- 1033 bytes in size
+- non executable
 
-To find the only human-readable file we must find out the filetypes using the command:
+Using the command:
 
-`file ./-*`
+`find -readable -size 1033c`
 
-This way, we will be presented with one file being ASCII text rather than data, which we will open using the command:
+and
 
-`cat ./-file07`
+`cat ./maybehere07/.file2`
 
-Logged in as bandit 5, found the `-file07` to be readable and contains the password.
+We are able to check if it is human readable and 1033 bytes, which nets use our password.
+
+Logged in as bandit 6, found file `./maybehere07/.file2` and got the password. Moving on to level 7.

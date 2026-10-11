@@ -1,17 +1,13 @@
-# Level 3 -> Level 4
+# Level 4 -> Level 5
 
-The goal is to find a hidden file in the `inhere` directory.
+The goal is to find the password stored in the only human-readable file in the `inhere` directory.
 
-We must first head into the `inhere` directory 
+To find the only human-readable file we must find out the filetypes using the command:
 
-`cd inhere`
+`file ./-*`
 
-Then we must check for *all* files
+This way, we will be presented with one file being ASCII text rather than data, which we will open using the command:
 
-`ls -a`
+`cat ./-file07`
 
-Finally, the file we find is `...Hiding-From-You`
-
-`cat ...Hiding-From-You`
-
-Logged in as bandit4, found the `...Hiding-From-You` file and got the password. Moving to Level 5.
+Logged in as bandit 5, found the `-file07` to be readable and contains the password.

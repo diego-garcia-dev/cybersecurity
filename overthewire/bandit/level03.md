@@ -1,13 +1,17 @@
-# Level 2 -> Level 3
+# Level 3 -> Level 4
 
-The goal is to find the password in the file `--spaces in this filename--`.
+The goal is to find a hidden file in the `inhere` directory.
 
-Since the file name starts with a `-` and has spaces we use the command(s):
+We must first head into the `inhere` directory 
 
-`cat ./--spaces\ in\ this\ filename--`
+`cd inhere`
 
-or
+Then we must check for *all* files
 
-`cat ./"--spaces in this filename--"`
+`ls -a`
 
-Logged in as bandit3, found the `--spaces in this filename--` and got the password. Moving to Level 4.
+Finally, the file we find is `...Hiding-From-You`
+
+`cat ...Hiding-From-You`
+
+Logged in as bandit4, found the `...Hiding-From-You` file and got the password. Moving to Level 5.

@@ -1,11 +1,11 @@
-# Level 10 -> Level 11
+# Level 11 -> Level 12
 
-The goal of this level is to find the password stored in the `data.txt` file filled with text encoded with base64.
+The goal of this level is to find the password in the file `data.txt`, where all lowercase and uppercase letter have been rotated by 13 positions.
 
-To decode the file, you must use the `-d` parameter when using the base64 command.
+To find the password we must familarize ourselves with Rot13. A letter substitution cipher that replaces a letter with the 13th letter after it in the Latin alphabet.
 
-The command I ran was:
+To begin deciphering, we must use the `tr` command and give it the sets it needs to decipher the text, being `A-Za-z` to `N-ZA-Mn-za-m`. We can implement this using the following command:
 
-`base64 -d data.txt`
+`tr 'A-Za-z' 'N-ZA-Mn-za-m' < data.txt` 
 
-Logged in as bandit11, found the password in the `data.txt` file. Moving to level 12.
+Granting us access to level 13 with our password.

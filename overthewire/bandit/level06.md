@@ -1,18 +1,19 @@
-# Level 5 -> Level 6 
+# Level 6 -> Level 7 
 
-The goal is to find the password stored in a file under the `inhere` directory which has the properties:
-- human-readable
-- 1033 bytes in size
-- non executable
+The goal of this level is to find the password stored somewhere on the server which has the following properties:
 
-Using the command:
+- Owned by the user bandit7
+- Owned by the group bandit6
+- 33 bytes in size
 
-`find -readable -size 1033c`
+The way I found this password was by using find:
 
-and
+`find -user bandit7 -group bandit6 -size 33c`
 
-`cat ./maybehere07/.file2`
+The only issue was that a lot of other directories and files fell under those circumstances. For this reason, I used `grep` to isolate/highliht the text needed:
 
-We are able to check if it is human readable and 1033 bytes, which nets use our password.
+`find -user bandit7 -group bandit6 -size 33c | grep password`
 
-Logged in as bandit 6, found file `./maybehere07/.file2` and got the password. Moving on to level 7.
+I then used cat to recieve the password.
+
+Logged in as `bandit7`, found the password in the file `/var/lib/dpkg/info/bandit7.password`. Moving on to level 8.

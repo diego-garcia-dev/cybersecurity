@@ -1,13 +1,25 @@
-# Level 0 -> Level 1
+# Level 1 -> Level 2
 
-The goal is to find a file called `readme` in the home directory to get the password for Level 2.
+## Goal 
 
-Since we need to find a file, we will use the `ls` command to list all non-hidden files in a directory:
+The goal is to find the password for the next level in a file named `-`.
 
-`ls`
+## Concepts 
 
-Finally, the command to view the contents of the `readme` file would be:
+`ls` is a bash command that allows you to list information of files in the current directory by default.
+`
 
-`cat readme`
+## What I did
 
-Logged in as bandit1, found the `readme` file and got the password. Moving on to Level 2.
+## Where I got stuck
+
+## What I learned
+
+## Real-World Application
+
+
+Since doing `cat -` will result in the terminal thinking `-` is a command, instead we use:
+
+`cat ./-`
+
+Logged in as bandit2, found the `-` file and got the password. Moving on to Level 3. 

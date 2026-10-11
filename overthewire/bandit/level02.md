@@ -1,9 +1,13 @@
-# Level 1 -> Level 2
+# Level 2 -> Level 3
 
-The goal is to find the password for the next level in a file named `-`.
+The goal is to find the password in the file `--spaces in this filename--`.
 
-Since doing `cat -` will result in the terminal thinking `-` is a command, instead we use:
+Since the file name starts with a `-` and has spaces we use the command(s):
 
-`cat ./-`
+`cat ./--spaces\ in\ this\ filename--`
 
-Logged in as bandit2, found the `-` file and got the password. Moving on to Level 3. 
+or
+
+`cat ./"--spaces in this filename--"`
+
+Logged in as bandit3, found the `--spaces in this filename--` and got the password. Moving to Level 4.
