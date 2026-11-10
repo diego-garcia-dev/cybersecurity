@@ -1,5 +1,3 @@
-cd ~/cybersecurity
-cat > README.md << 'EOF'
 # Cybersecurity
 
 I'm a computer science student at Texas A&M focusing on cybersecurity. This repo is where I document what I'm learning: the rooms I complete, the projects I build, and what went wrong along the way. Everything here is written in my own words.
@@ -35,5 +33,3 @@ Each write-up covers the goal, the concept, what I did, what went wrong, what I 
 ## Contact
 
 GitHub: [diego-garcia-dev](https://github.com/diego-garcia-dev)
-EOF
-grep -rIniE 'BEGIN .*PRIVATE KEY|password|passwd|secret|token' --exclude-dir=.git . | head -30
